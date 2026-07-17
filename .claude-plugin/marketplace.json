@@ -9,7 +9,7 @@
     {
       "name": "k",
       "source": "./plugins/k",
-      "description": "Common skills shared across KonH's projects (commit, pr, ...)"
+      "description": "Common skills shared across KonH's projects (commit, pr, specify, plan, plan-review, implement, ...)"
     }
   ]
 }
