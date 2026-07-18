@@ -1,9 +1,9 @@
 ---
 name: plan
-description: Create an implementation plan and save it to docs/specs/<index>_<name>/plan.md, gated by a required constitution check.
+description: Create an implementation plan and save it to docs/specs/<YY_MM_DD_HH>_<name>/plan.md, gated by a required constitution check.
 ---
 
-Create a plan for the requested task and save it to `docs/specs/<index>_<name>/plan.md`.
+Create a plan for the requested task and save it to `docs/specs/<YY_MM_DD_HH>_<name>/plan.md`.
 
 ## Doc paths
 
@@ -27,7 +27,7 @@ Spawn an **architect sub-agent** (general-purpose) to design and write the plan.
 - The user's task description
 - Relevant project rules (from `CLAUDE.md` and any project rules directory)
 - The contents of `docs/constitution.md`
-- Existing spec/plan folders in `docs/specs/` (list them so it picks the next index)
+- Existing spec/plan folders in `docs/specs/` (list them to resolve an existing dated spec identifier)
 - The output path and format rules below
 
 The architect writes the plan file directly. You (orchestrator) then:
@@ -39,18 +39,15 @@ The architect writes the plan file directly. You (orchestrator) then:
 ## Spec Detection
 
 If `$ARGUMENTS` contains a spec folder name or index, or if a `docs/specs/<index>_*` folder exists with no `plan.md` yet:
-- Read `docs/specs/<index>_<name>/spec.md`
+- Read `docs/specs/<YY_MM_DD_HH>_<name>/spec.md`
 - Brief the architect with the spec contents
 - Include a **Spec** section at the top of the plan (verbatim summary of intent and acceptance criteria from the spec)
 
-If no spec folder is found (a purely technical task — migration, refactor, infra), still write to `docs/specs/<index>_<name>/plan.md`, just without a `spec.md` in that folder.
+If no spec folder is found (a purely technical task — migration, refactor, infra), create `docs/specs/<YY_MM_DD_HH>_<name>/plan.md` using the current local timestamp, just without a `spec.md` in that folder.
 
 ## Plan File Rules
 
-- Filename prefix is a zero-padded two-digit index reflecting creation order: `00_`, `01_`, `02_`, etc.
-  - `00_` is reserved for reference/context documents
-  - Feature plans start at `01_` and increment for each new plan
-- Filename body is a short kebab-case description (e.g. `01_map-prototype.md`)
+- The containing spec folder uses `YY_MM_DD_HH_name`, where the timestamp is the local creation time and `name` is a short kebab-case description (e.g. `26_07_18_14_map-prototype`)
 - Structure: goal, approach, steps — keep it concise
 - If the plan touches source code, include a **Tests** section covering what unit/integration tests should be added or updated
 - Do NOT make any code, asset, or file changes — only write the plan document
