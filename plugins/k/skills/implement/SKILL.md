@@ -1,18 +1,18 @@
 ---
 name: implement
-description: Implement the plan at docs/specs/<index>_<name>/plan.md, spawning developer sub-agents per phase, writing tests test-first, and marking off completed steps.
+description: Implement the plan at docs/specs/<YY_MM_DD_HH>_<name>/plan.md, spawning developer sub-agents per phase, writing tests test-first, and marking off completed steps.
 ---
 
-Implement the plan at `docs/specs/<index>_<name>/plan.md`.
+Implement the plan at `docs/specs/<YY_MM_DD_HH>_<name>/plan.md`.
 
 ## Plan Discovery
 
-**With `$ARGUMENTS`:** resolve against `docs/specs/` — look for `docs/specs/<arg>/plan.md` or a folder whose name starts with `<arg>`.
+**With `$ARGUMENTS`:** resolve against `docs/specs/` — look for `docs/specs/<YY_MM_DD_HH>_<name>/plan.md` using the full dated spec identifier.
 
 **Without `$ARGUMENTS`:**
 1. List all `*/plan.md` files under `docs/specs/`
-2. Extract the leading numeric prefix from each
-3. Use the file with the highest numeric prefix
+2. Extract the `YY_MM_DD_HH` prefix from each folder
+3. Use the file with the latest timestamp prefix
 
 ## Orchestration
 

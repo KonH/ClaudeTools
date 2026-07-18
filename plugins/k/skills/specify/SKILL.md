@@ -1,27 +1,27 @@
 ---
 name: specify
-description: Capture feature intent and acceptance criteria before planning begins, writing docs/specs/<index>_<name>/spec.md. Stops for user approval before the plan skill runs.
+description: Capture feature intent and acceptance criteria before planning begins, writing docs/specs/<YY_MM_DD_HH>_<name>/spec.md. Stops for user approval before the plan skill runs.
 ---
 
-Capture feature intent and acceptance criteria before planning begins. Writes `docs/specs/<index>_<name>/spec.md` and stops — the user must approve the spec before the `plan` skill runs.
+Capture feature intent and acceptance criteria before planning begins. Writes `docs/specs/<YY_MM_DD_HH>_<name>/spec.md` and stops — the user must approve the spec before the `plan` skill runs.
 
 ## Doc paths
 
 Default convention: specs live under `docs/specs/`. Check the project's `CLAUDE.md` for an overriding location (e.g. a "Docs Layout" section or explicit mention of spec paths) before falling back to the default.
 
-## Index Derivation
+## Spec Identifier Derivation
 
 1. Use `Glob` with pattern `docs/specs/*/*.md` to list existing spec folders — do NOT use a trailing-slash pattern (`docs/specs/*/`) or a bare `docs/specs/*`, both silently return nothing on Windows; the nested `*/*.md` form matches files one level down and works
-2. Extract the leading numeric prefix from each folder segment in the returned paths
-3. Take the highest number found and add 1
-4. Zero-pad to two digits (e.g. `35`)
+2. Generate the current local timestamp as `YY_MM_DD_HH` (for example, `26_07_18_14`)
+3. Combine it with a short kebab-case feature name: `<YY_MM_DD_HH>_<name>`
+4. Do not derive or assign a numeric index
 
 ## Orchestration
 
 Spawn an **architect sub-agent** (general-purpose) briefed with:
 - The user's feature description
 - Relevant project rules from `CLAUDE.md` and any project rules directory
-- The output path: `docs/specs/<index>_<name>/spec.md`
+- The output path: `docs/specs/<YY_MM_DD_HH>_<name>/spec.md`
 - The spec format below
 
 The architect writes the spec file directly. You (orchestrator) then:
@@ -57,5 +57,5 @@ As a <role>, I want <capability>, so that <benefit>.
 
 - Do NOT write any plan, code, or assets — only the spec document.
 - Use `[NEEDS CLARIFICATION: …]` markers freely — surfacing unknowns early is the point.
-- The spec folder name uses kebab-case: `docs/specs/32_my-feature/spec.md`.
+- The spec folder name starts with its creation timestamp and uses a kebab-case name: `docs/specs/26_07_18_14_my-feature/spec.md`.
 - Do not create `plan.md` in the spec folder — that is the `plan` skill's job.

@@ -1,18 +1,18 @@
 ---
 name: plan-review
-description: Review the latest (or specified) plan under docs/specs/ for missing steps, wrong assumptions, or guideline violations before implementation begins.
+description: Review a dated plan under docs/specs/ for missing steps, wrong assumptions, or guideline violations before implementation begins.
 ---
 
-Review the latest plan under `docs/specs/` (or the plan file specified in `$ARGUMENTS`) for potential problems before implementation begins.
+Review the latest dated plan under `docs/specs/` (or the plan file specified in `$ARGUMENTS`) for potential problems before implementation begins.
 
 ## Plan Discovery
 
-**With `$ARGUMENTS`:** resolve against `docs/specs/` — look for `docs/specs/<arg>/plan.md` or a folder whose name starts with `<arg>`.
+**With `$ARGUMENTS`:** resolve against `docs/specs/` — look for `docs/specs/<YY_MM_DD_HH>_<name>/plan.md` using the full dated spec identifier.
 
 **Without `$ARGUMENTS`:**
 1. List all `*/plan.md` files under `docs/specs/`
-2. Extract the leading numeric prefix from each
-3. Use the file with the highest numeric prefix
+2. Extract the `YY_MM_DD_HH` prefix from each folder
+3. Use the file with the latest timestamp prefix
 
 ## Rules
 
