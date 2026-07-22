@@ -40,8 +40,22 @@ As a <role>, I want <capability>, so that <benefit>.
 
 ## Acceptance Criteria
 
-- **Given** <precondition> **When** <action> **Then** <outcome>
-- (one bullet per observable behaviour; cover the happy path and the most important edge cases)
+Legend: `Precondition => Action => Outcome`, grouped under a shared precondition where one applies to several rows.
+
+- <Precondition or scenario shared by the rows below>
+  - <action> => <outcome>
+  - <action> => <outcome>
+- <Next precondition or scenario group>
+  - <action> => <outcome>
+- (cover the happy path and the most important edge cases; a group can hold a single row if nothing else shares its precondition)
+
+## Tech Notes
+
+Maps each product-facing behaviour above to its concrete implementation — specific files, classes, methods, commands, state paths.
+
+- <Acceptance-criteria bullet or group, restated briefly>:
+  - <implementation detail>
+  - <implementation detail>
 
 ## Out of Scope
 
@@ -56,6 +70,8 @@ As a <role>, I want <capability>, so that <benefit>.
 ## Rules
 
 - Do NOT write any plan, code, or assets — only the spec document.
+- **Acceptance Criteria stays in plain product language** — describe what the player/user does and sees (e.g. "Player clicks a province"), never which class, method, or command fires. Group rows that share a precondition under one bullet instead of repeating it per row — this is what keeps the section skimmable instead of a wall of near-duplicate lines.
+- **Tech Notes carries every technical anchor** the architect would otherwise cram into Acceptance Criteria: exact class/method names, command types, state paths, file references. One entry per Acceptance Criteria bullet/group that needs one; omit Tech Notes entries for purely product-level bullets that need no technical grounding.
 - Use `[NEEDS CLARIFICATION: …]` markers freely — surfacing unknowns early is the point.
 - The spec folder name starts with its creation timestamp and uses a kebab-case name: `docs/specs/26_07_18_14_my-feature/spec.md`.
 - Do not create `plan.md` in the spec folder — that is the `plan` skill's job.
