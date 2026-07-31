@@ -18,3 +18,4 @@ Before committing, check the current branch:
 - Explain *why*, not *what* — the diff already shows what changed
 - No bullet-point summaries of changed files
 - Always add a `Co-Authored-By` trailer for the model in use, e.g. `Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>`
+- If a project-specific pre-commit step bumps a version number, only ever increment the minor/patch segment. The major (or milestone) segment is a human decision — never bump it automatically, and never let an overflowing minor segment roll over into it. If a project's version-bump instructions are ambiguous about this, stop and ask a human rather than guessing.
