@@ -1,6 +1,6 @@
 ---
 name: plan
-description: Create an implementation plan and save it to docs/specs/<YY_MM_DD_HH>_<name>/plan.md, gated by a required constitution check.
+description: Create a dated implementation plan under docs/specs, gated by a required project-constitution check.
 ---
 
 Create a plan for the requested task and save it to `docs/specs/<YY_MM_DD_HH>_<name>/plan.md`.
