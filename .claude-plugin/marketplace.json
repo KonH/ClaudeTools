@@ -7,8 +7,8 @@
   "description": "KonH's shared Claude Code plugins",
   "plugins": [
     {
-      "name": "k",
-      "source": "./plugins/k",
+      "name": "cc",
+      "source": "./plugins/cc",
       "description": "Common skills shared across KonH's projects (commit, pr, specify, plan, plan-review, implement, ...)"
     }
   ]

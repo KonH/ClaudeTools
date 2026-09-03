@@ -1,6 +1,6 @@
 ---
 name: specify
-description: Capture feature intent and acceptance criteria before planning begins, writing docs/specs/<YY_MM_DD_HH>_<name>/spec.md. Stops for user approval before the plan skill runs.
+description: Capture feature intent and acceptance criteria in a dated docs/specs folder, stopping for approval before planning.
 ---
 
 Capture feature intent and acceptance criteria before planning begins. Writes `docs/specs/<YY_MM_DD_HH>_<name>/spec.md` and stops — the user must approve the spec before the `plan` skill runs.

@@ -1,6 +1,6 @@
 ---
 name: implement
-description: Implement the plan at docs/specs/<YY_MM_DD_HH>_<name>/plan.md, spawning developer sub-agents per phase, writing tests test-first, and marking off completed steps.
+description: Implement a dated plan under docs/specs, using sub-agents for substantial phases, tests first, and checked-off progress.
 ---
 
 Implement the plan at `docs/specs/<YY_MM_DD_HH>_<name>/plan.md`.

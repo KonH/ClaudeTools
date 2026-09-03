@@ -1,6 +1,6 @@
 ---
 name: plan-review
-description: Review a dated plan under docs/specs/ for missing steps, wrong assumptions, or guideline violations before implementation begins.
+description: Review a dated plan under docs/specs for missing steps, wrong assumptions, or guideline violations before implementation.
 ---
 
 Review the latest dated plan under `docs/specs/` (or the plan file specified in `$ARGUMENTS`) for potential problems before implementation begins.
