@@ -75,7 +75,13 @@ Measurable, technology-agnostic outcomes that prove the feature works — no fra
 ## Rules
 
 - Do NOT write any plan, code, or assets — only the spec document.
-- **The spec stays implementation-free, end to end** — no file names, classes, methods, commands, tech stack, or APIs anywhere in the document, Success Criteria included. Anything technical belongs in the `plan` skill's plan.md (its Technical Mapping section), never here.
+- **The spec stays implementation-free, end to end** — no file names, classes, methods, commands, tech stack, or APIs anywhere in the document, Success Criteria included. Anything technical belongs in the `plan` skill's plan.md (its Technical Mapping section), never here. Concretely, none of these appear anywhere in the spec:
+  - file paths and file names of any extension
+  - class, method, field, or component names; backticked code identifiers of any kind
+  - config keys and camelCase/snake_case setting names
+  - framework, engine, language, and library names
+- **The section set above is exhaustive** — Feature Intent, Acceptance Criteria, Success Criteria, Out of Scope, and (only while unresolved) Ambiguities. Do NOT add a `## Tech Notes`, `## Design Notes`, or `## Technical Mapping` section. Earlier revisions of this skill mandated a `## Tech Notes` section; if you are working from an existing spec or example that has one, it is out of date — that content belongs in plan.md's Technical Mapping.
+- **If the project provides a spec-style linter**, run it on the written spec before presenting it for approval, and re-brief the architect with its output rather than hand-patching the spec yourself. Check the project's `CLAUDE.md` for one.
 - **Acceptance Criteria stays in plain product language** — describe what the player/user does and sees (e.g. "Player clicks a province"), never which class, method, or command fires. Group rows that share a precondition under one bullet instead of repeating it per row — this is what keeps the section skimmable instead of a wall of near-duplicate lines.
 - **Success Criteria stays measurable and technology-agnostic** — a metric a non-technical stakeholder could verify (time, rate, count, satisfaction), never an implementation detail like an API's response time or a database's throughput.
 - Use `[NEEDS CLARIFICATION: …]` markers freely — surfacing unknowns early is the point. Resolve every one via the interactive step in Orchestration before asking the user to approve the spec.

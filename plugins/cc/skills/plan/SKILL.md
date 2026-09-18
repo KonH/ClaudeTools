@@ -50,6 +50,12 @@ If no spec folder is found (a purely technical task — migration, refactor, inf
 
 - The containing spec folder uses `YY_MM_DD_HH_name`, where the timestamp is the local creation time and `name` is a short kebab-case description (e.g. `26_07_18_14_map-prototype`)
 - Structure: goal, approach, Technical Mapping (when a spec exists), steps — keep it concise
+- **Scale detail to scope.** Estimate the changed-line count before choosing the structure:
+  - under ~300 changed lines — goal, approach, Agent/User Steps, Tests, Constitution Check only. No Technical Mapping, no code, no per-file enumeration.
+  - ~300 lines and up — add Technical Mapping (when a spec exists), and split Approach into subsections only where a real design tension needs resolving.
+- **No verbatim implementation code.** Names and shapes, not bodies. Allowed: file paths, type and member names, signatures, field lists, config keys, command names. Not allowed: method bodies, loop bodies, full class or struct definitions, markup blocks, test bodies. Write "one-pass scan filtered on owner and region" — not the twelve lines that do it. The implementing agent rewrites those lines anyway; in the plan they only inflate the document it re-reads every turn.
+- **Budget: ~2500 words.** If the design rationale genuinely does not fit, it does not belong in `plan.md` — put it in `design.md` beside it in the same spec folder and link to it from the Approach section. The plan stays the thing an implementer works from; `design.md` holds the "why this over the alternative" record. Rationale that prevents a wrong architectural choice is worth keeping — just not inline.
+- **Do not enumerate one step per file touched.** Group mechanical edits into a single step that names the rule ("move every debug-only view into the debug folder and fix the assembly references") instead of listing each move.
 - **When a spec exists**, include a **Technical Mapping** section mapping each Acceptance Criteria bullet/group from the spec to its concrete implementation:
 
   ```markdown
