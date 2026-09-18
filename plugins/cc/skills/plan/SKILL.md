@@ -42,13 +42,26 @@ If `$ARGUMENTS` contains a spec folder name or index, or if a `docs/specs/<index
 - Read `docs/specs/<YY_MM_DD_HH>_<name>/spec.md`
 - Brief the architect with the spec contents
 - Include a **Spec** section at the top of the plan (verbatim summary of intent and acceptance criteria from the spec)
+- Include a **Technical Mapping** section (see Plan File Rules) — this is where the technical anchors (files, classes, methods, commands, state paths) that the spec deliberately leaves out now live
 
 If no spec folder is found (a purely technical task — migration, refactor, infra), create `docs/specs/<YY_MM_DD_HH>_<name>/plan.md` using the current local timestamp, just without a `spec.md` in that folder.
 
 ## Plan File Rules
 
 - The containing spec folder uses `YY_MM_DD_HH_name`, where the timestamp is the local creation time and `name` is a short kebab-case description (e.g. `26_07_18_14_map-prototype`)
-- Structure: goal, approach, steps — keep it concise
+- Structure: goal, approach, Technical Mapping (when a spec exists), steps — keep it concise
+- **When a spec exists**, include a **Technical Mapping** section mapping each Acceptance Criteria bullet/group from the spec to its concrete implementation:
+
+  ```markdown
+  ## Technical Mapping
+
+  Maps each Acceptance Criteria bullet/group from the spec to its concrete implementation.
+
+  - <Acceptance-criteria bullet or group, restated briefly>:
+    - <implementation detail: specific files, classes, methods, commands, state paths>
+  ```
+
+  One entry per Acceptance Criteria bullet/group that needs one; omit entries for purely product-level bullets that need no technical grounding. This is the only place implementation anchors are tied to spec language — the spec itself stays technology-agnostic.
 - If the plan touches source code, include a **Tests** section covering what unit/integration tests should be added or updated
 - Do NOT make any code, asset, or file changes — only write the plan document
 - End every plan with the line: `Use the implement skill to start working on the plan or request changes.`

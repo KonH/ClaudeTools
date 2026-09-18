@@ -25,9 +25,15 @@ Spawn an **architect sub-agent** (general-purpose) briefed with:
 - The spec format below
 
 The architect writes the spec file directly. You (orchestrator) then:
-1. Present the spec contents to the user
-2. Collect feedback and re-brief the architect if changes are needed (iterate until the user approves)
-3. **Stop.** Do not run the `plan` skill or write any code. The user must explicitly request the next step.
+1. **Resolve ambiguities interactively.** Extract every `[NEEDS CLARIFICATION: ...]` marker from the written spec. If there are any:
+   - Assign each a priority tier — Scope > Security > UX > Tech (highest impact first) — and sort by tier, preserving original order within a tier. Surface every marker; do not cap how many get asked.
+   - Number them 1-based in that order (Q1, Q2, Q3, …).
+   - For each, draft 2-4 concrete candidate answers reflecting reasonable interpretations.
+   - Ask them with the `AskUserQuestion` tool, one question per marker, setting each question's `header` to its priority tier (`Scope`/`Security`/`UX`/`Tech`) so the ordering is visible. Batch across multiple calls if there are more than 4 (that tool caps at 4 questions per call).
+   - Re-brief the architect with the resolved answers so it updates the spec, replacing each marker with the chosen (or custom) answer.
+2. Present the (now unambiguous) spec contents to the user for approval.
+3. Collect feedback and re-brief the architect if changes are needed (iterate until the user approves).
+4. **Stop.** Do not run the `plan` skill or write any code. The user must explicitly request the next step.
 
 ## Spec Format
 
@@ -49,13 +55,12 @@ Legend: `Precondition => Action => Outcome`, grouped under a shared precondition
   - <action> => <outcome>
 - (cover the happy path and the most important edge cases; a group can hold a single row if nothing else shares its precondition)
 
-## Tech Notes
+## Success Criteria
 
-Maps each product-facing behaviour above to its concrete implementation — specific files, classes, methods, commands, state paths.
+Measurable, technology-agnostic outcomes that prove the feature works — no frameworks, APIs, or tools. Mix quantitative (time, rate, volume) and qualitative (satisfaction, completion) measures where they apply.
 
-- <Acceptance-criteria bullet or group, restated briefly>:
-  - <implementation detail>
-  - <implementation detail>
+- <Measurable outcome, e.g. "Player completes a turn in under 10 seconds">
+- <Measurable outcome, e.g. "90% of new players successfully build their first structure without help">
 
 ## Out of Scope
 
@@ -64,14 +69,15 @@ Maps each product-facing behaviour above to its concrete implementation — spec
 ## Ambiguities
 
 - [NEEDS CLARIFICATION: <question the architect cannot resolve from context alone>]
-- (omit this section entirely if there are no ambiguities)
+- (omit this section entirely if there are no ambiguities — it should always be empty by the time the spec reaches the user, since Orchestration resolves every marker first)
 ```
 
 ## Rules
 
 - Do NOT write any plan, code, or assets — only the spec document.
+- **The spec stays implementation-free, end to end** — no file names, classes, methods, commands, tech stack, or APIs anywhere in the document, Success Criteria included. Anything technical belongs in the `plan` skill's plan.md (its Technical Mapping section), never here.
 - **Acceptance Criteria stays in plain product language** — describe what the player/user does and sees (e.g. "Player clicks a province"), never which class, method, or command fires. Group rows that share a precondition under one bullet instead of repeating it per row — this is what keeps the section skimmable instead of a wall of near-duplicate lines.
-- **Tech Notes carries every technical anchor** the architect would otherwise cram into Acceptance Criteria: exact class/method names, command types, state paths, file references. One entry per Acceptance Criteria bullet/group that needs one; omit Tech Notes entries for purely product-level bullets that need no technical grounding.
-- Use `[NEEDS CLARIFICATION: …]` markers freely — surfacing unknowns early is the point.
+- **Success Criteria stays measurable and technology-agnostic** — a metric a non-technical stakeholder could verify (time, rate, count, satisfaction), never an implementation detail like an API's response time or a database's throughput.
+- Use `[NEEDS CLARIFICATION: …]` markers freely — surfacing unknowns early is the point. Resolve every one via the interactive step in Orchestration before asking the user to approve the spec.
 - The spec folder name starts with its creation timestamp and uses a kebab-case name: `docs/specs/26_07_18_14_my-feature/spec.md`.
 - Do not create `plan.md` in the spec folder — that is the `plan` skill's job.
